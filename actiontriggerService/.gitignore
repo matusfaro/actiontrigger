@@ -1,0 +1,60 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+## fdsfds fdsfsdfdsfds
+arm
+x86
+
+
+
+
+# MAC OSX                                        
+*.DS_Store                                       
+                                                 
+# Compiled Object files                          
+*.slo                                            
+*.lo                                             
+*.o                                              
+                                                 
+# Compiled Dynamic libraries                     
+*.so                                             
+                                                 
+# Compiled Static libraries                      
+*.lai                                            
+*.la                                             
+*.a                                              
+                                                 
+# Compiled Translations                          
+*/translations/*.qm                              
+                                                 
+/.settings/                                      
+*/arm/                                           
+*/x86/                                           
+.metadata/*                                      
+/.metadata/                                      
+192.*                                            
+169.254.0.1                                      
+#We really want the config.pri to be here a while
+#config.pri                                      
+
+
+## Matus
+.settings
+.project
+.cproject
+.device

@@ -1,0 +1,7 @@
+<model>
+    <item name="My Name1" description="Description is here1" favourite="true" />
+    <item name="My Name2" description="Description is here2" />
+    <item name="My really long name that should not fit into one line and should wrap around properly without overlapping the arrow image on the right" description="Description is here3" favourite="true" />
+    <item name="My Name4" description="Description is here4" favourite="true" />
+    <item name="My Name5555" description="Description is here5" />
+</model>

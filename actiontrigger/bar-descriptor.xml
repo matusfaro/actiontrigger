@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--
+
+   Copyright (c) 2013-2014 BlackBerry Limited.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+-->
+<qnx xmlns="http://www.qnx.com/schemas/application/1.0">
+
+    <!-- BlackBerry 10 application descriptor file. Specifies parameters for
+        identifying, installing, and launching native applications on BlackBerry
+        10. -->
+
+    <!-- A universally unique application identifier. Must be unique across
+        all BlackBerry 10 applications. Using a reverse DNS-style name as the id
+        is recommended. (Eg. com.example.ExampleApplication.) Required. -->
+    <id>com.actiontrigger</id>
+
+    <!-- The name that is displayed in the BlackBerry 10 application installer.
+        May have multiple values for each language. See samples or xsd schema file.
+        Optional. -->
+    <name>Actiontrigger</name>
+
+    <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents
+        application version which can be used to check for application upgrade. Values
+        can also be 1-part or 2-part. It is not necessary to have a 3-part value.
+        An updated version of application must have a versionNumber value higher
+        than the previous version. Required. -->
+    <versionNumber>1.4.0</versionNumber>
+    <category>core.games</category>
+    <platformVersion>10.2.0</platformVersion>
+
+    <!-- Fourth digit segment of the package version. First three segments are
+        taken from the <versionNumber> element. Must be an integer from 0 to 2^16-1 -->
+    <buildId>252</buildId>
+
+    <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents
+        the version of the application, as it should be shown to users. Optional. -->
+    <!-- <versionLabel></versionLabel> -->
+
+    <!-- Description, displayed in the BlackBerry 10 application installer.
+        May have multiple values for each language. See samples or xsd schema file.
+        Optional. -->
+    <description>Take control of your mobile device with ActionTrigger. Create custom procedures executing specific actions in response to triggers.</description>
+
+    <!-- Copyright information. Optional. -->
+    <!-- <copyright></copyright> -->
+
+    <!-- Name of author which is used for signing. Must match the developer
+        name of your development certificate. -->
+    <author>Individual</author>
+    
+    <configuration name="Device-Debug">
+        <platformArchitecture>armle-v7</platformArchitecture>
+        <entryPointType>Qnx/Elf</entryPointType>
+
+        <asset entryPointId="actiontrigger" path="arm/o.le-v7-g/actiontrigger"
+            entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <asset entryPointId="actiontriggerService"
+            path="${workspace_loc:/actiontriggerService/arm/o.le-v7-g/actiontriggerService}"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+
+    <configuration name="Device-Release">
+        <platformArchitecture>armle-v7</platformArchitecture>
+        <entryPointType>Qnx/Cascades</entryPointType>
+
+        <asset entryPointId="actiontrigger" path="arm/o.le-v7/actiontrigger.so"
+            entry="true" type="Qnx/Cascades">actiontrigger</asset>
+        <asset entryPointId="actiontriggerService"
+            path="${workspace_loc:/actiontriggerService/arm/o.le-v7/actiontriggerService.so}"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+
+    <configuration name="Device-Profile">
+        <platformArchitecture>armle-v7</platformArchitecture>
+        <entryPointType>Qnx/Elf</entryPointType>
+
+        <asset entryPointId="actiontrigger" path="arm-p/o.le-v7-g/actiontrigger"
+            entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <asset entryPointId="actiontriggerService"
+            path="${workspace_loc:/actiontriggerService/arm/o.le-v7-g/actiontriggerService}"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+
+    <configuration name="Simulator-Debug">
+        <platformArchitecture>x86</platformArchitecture>
+        <entryPointType>Qnx/Elf</entryPointType>
+
+        <asset entryPointId="actiontrigger" path="x86/o-g/actiontrigger"
+            entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <!--
+            -->
+        <asset entryPointId="actiontriggerService"
+            path="../actiontriggerService/x86/o-g/actiontriggerService"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+    
+    <configuration name="Device-Coverage">
+       <platformArchitecture>armle-v7</platformArchitecture>PointType>
+
+        <asset entryPointId="actiontrigger" path="arm/o.le-v7-g/actiontrigger"
+            entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <asset entryPointId="actiontriggerService"
+            path="${workspace_loc:/actiontriggerService/arm/o.le-v7-g/actiontriggerService}"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+    
+    <configuration name="Simulator-Profile">
+       <platformArchitecture>x86</platformArchitecture>
+        <asset entryPointId="actiontrigger" path="arm-p/o.le-v7-g/actiontrigger"
+            entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <asset entryPointId="actiontriggerService"
+            path="../actiontriggerService/x86/o.le-v7-g/actiontriggerService"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+    
+    <configuration name="Simulator-Coverage">
+       <platformArchitecture>x86</platformArchitecture>PointType>
+
+        <asset entryPointId="actiontrigger" path="arm/o.le-v7-g/actiontrigger"
+            entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <asset entryPointId="actiontriggerService"
+            path="${workspace_loc:/actiontriggerService/x86/o.le-v7-g/actiontriggerService}"
+            type="Qnx/Elf">actiontriggerService</asset>
+    </configuration>
+
+    <entryPoint id="actiontrigger">
+        <name>Actiontrigger</name>
+    </entryPoint>
+
+    <!--
+    -->
+    <entryPoint id="actiontriggerService">
+        <name>actiontriggerService</name>
+        <entryPointType>Qnx/Elf</entryPointType>
+        <permission system="true">_sys_run_headless</permission>
+        <permission system="true">_sys_headless_nostop</permission>
+    </entryPoint>
+
+    <invoke-target id="com.actiontriggerService">
+        <invoke-target-type>application.headless</invoke-target-type>
+        <invoke-target-name>actiontriggerService</invoke-target-name>
+        <entry-point-id>actiontriggerService</entry-point-id>
+        <filter>
+            <action>bb.action.START</action>
+            <mime-type>actiontrigger/START</mime-type>
+            <property var="uris" value="headless:" />
+        </filter>
+        <permission system="true">_sys_run_headless</permission>
+        <permission system="true">_sys_headless_nostop</permission>
+    </invoke-target>
+
+    <!-- Invocation receive -->
+    <invoke-target id="com.actiontrigger">
+        <invoke-target-type>application</invoke-target-type>
+        <invoke-target-name>ActionTrigger</invoke-target-name>
+        <icon>
+            <image>assets/logo/ProductIcon480x480.png</image>
+        </icon>
+        <filter>
+            <action>bb.action.VIEW</action>
+            <action>bb.action.OPEN</action>
+            <mime-type>*</mime-type>
+            <property var="uris" value="actiontrigger://"/>
+        </filter>
+        <entry-point-id>actiontrigger</entry-point-id>
+    </invoke-target>
+
+    <!-- Unique author ID assigned by signing authority. Required if using debug
+        tokens. -->
+    <authorId>gYAAgPEb-oUhguNni__CsXSLYgg</authorId>
+
+    <initialWindow>
+        <autoOrients>true</autoOrients>
+        <systemChrome>none</systemChrome>
+    </initialWindow>
+
+    <!-- The icon for the application, which should be 114x114. -->
+    <icon>
+       <image>assets/logo/ProductIcon480x480.png</image>
+    </icon>
+    <splashScreens>
+       <image>assets/logo/splash768x1280.png</image>
+       <image>assets/logo/Splash720x720.png</image>
+       <image>assets/logo/splash720x1280.png</image>
+       <image>assets/logo/splash1280x720.png</image>
+       <image>assets/logo/splash1280x768.png</image>
+    </splashScreens>
+
+    <asset path="icon.png">icon.png</asset>
+    <asset path="assets">assets</asset>
+
+    <!-- Locale support -->
+    <asset path="translations" dest="qm">
+        <include name="*.qm" />
+    </asset>
+
+    <!-- Permissions -->
+    <permission system="true">run_native</permission>
+    <permission system="true">_sys_run_headless</permission>
+    <permission system="true">_sys_headless_nostop</permission>
+    <permission>access_led_control</permission>
+    <permission>access_pimdomain_messages</permission>
+    <permission>access_wifi_public</permission>
+    <permission>read_geolocation</permission>
+    <permission>access_location_services</permission>
+    <permission>use_camera</permission>
+    <permission>access_shared</permission>
+    <permission>post_notification</permission>
+    <permission>record_audio</permission>
+    <permission>run_when_backgrounded</permission>
+    <permission>access_notify_settings_control</permission>
+    <permission>access_sms_mms</permission>
+    <permission>read_personally_identifiable_information</permission>
+    <permission>access_internet</permission>
+    <permission>access_phone</permission>
+    <permission>control_phone</permission>
+    <permission>use_camera_desktop</permission>
+
+    <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib" />
+
+    <!-- Override theme style -->
+    <env var="CASCADES_THEME" value="dark"/>
+
+</qnx>

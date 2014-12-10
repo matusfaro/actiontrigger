@@ -1,0 +1,13 @@
+
+/*
+/*/
+
+!.gitignore
+!LICENSE
+!README
+!actiontrigger
+!actiontrigger/*
+!actiontriggerService
+!actiontriggerService/*
+!actiontriggercommon
+!actiontriggercommon/*
