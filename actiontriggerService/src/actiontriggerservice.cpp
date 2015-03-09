@@ -29,12 +29,15 @@ namespace actiontrigger
     ActionTriggerService::ActionTriggerService() :
             QObject()
     {
-        LOG->debug("Starting headless service");
-
-        HeadlessListener::get()->start();
     }
 
     ActionTriggerService::~ActionTriggerService()
     {
+    }
+
+    void ActionTriggerService::start()
+    {
+        LOG->debug("Starting headless service");
+        HeadlessListener::get()->start();
     }
 }

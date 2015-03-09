@@ -6,8 +6,9 @@ import bb.platform 1.2
 TabbedPane {
     function init() {
         Qt._actiontrigger = _actiontrigger
-        Qt._headlessConnector = Qt._actiontrigger.getGlobalResources().getHeadlessConnector()
-        Qt._headlessConnector.invoke()
+        ////// HEADLESS DISABLED
+        //Qt._headlessConnector = Qt._actiontrigger.getGlobalResources().getHeadlessConnector()
+        //Qt._headlessConnector.invoke()
         Qt._premium = premium
 
         var resetApplication = false
@@ -42,7 +43,7 @@ TabbedPane {
         Qt._overviewPage_showAll = false
         Qt._libraryInstance_listView_listLibrary = libraryInstance.prop_listView_listLibrary
         Qt._overviewInstance_listView_listLibrary = overviewTabInstance.prop_listViewOverview
-        Qt._debugInstance_listView_listDebug = debugTabInstance.prop_listViewDebug
+//        Qt._debugInstance_listView_listDebug = debugTabInstance.prop_listViewDebug
 //        Qt._headlessInstance_listView_listLibrary = headlessTabInstance.prop_listViewHeadless
         Qt._app = _app
         Qt._procedurePage = procedurePage
@@ -53,7 +54,7 @@ TabbedPane {
         /*Qt._paymentmanager.setConnectionMode(0);*/
 
         // Setup debug logging
-        Qt._actiontrigger.getGlobalResources().setDebugDataModel(Qt._debugInstance_listView_listDebug.dataModel)
+//        Qt._actiontrigger.getGlobalResources().setDebugDataModel(Qt._debugInstance_listView_listDebug.dataModel)
         
         // Check for existing purchases
         if (! Qt._actiontrigger.hasPremium()) {
@@ -65,7 +66,8 @@ TabbedPane {
         Qt._actiontrigger.postNotification.connect(postNotification);
         
         // Connect to headless
-        Qt._headlessConnector.start()
+        ////// HEADLESS DISABLED
+        //Qt._headlessConnector.start()
 
         // Set data models
         Qt._overviewInstance_listView_listLibrary.dataModel = libraryInstance.prop_listView_dataModel_listLibrary
@@ -302,39 +304,39 @@ TabbedPane {
     }
 
     
-        Tab {
-            enabled: true
-            id: tabDebug
-            title: "Debug"
-            imageSource: "asset:///images/bb10/ic_diagnostics.png"
-            NavigationPane {
-                
-                id: paneDebug
-                Debug {
-                    id: debugTabInstance
-                }
-                onPushTransitionEnded: {
-                    if (page && page.init) {
-                        page.init()
-                    }
-                }
-                onPopTransitionEnded: {
-                    if (page) {
-                        if (page.cleanup) {
-                            page.cleanup()
-                        }
-                        /*
-                         * DO NOT DESTROY THE PAGE! FIX ME!
-                         * Actions and triggers and possibly more become the children of the page and get destroyed as well.
-                         */
-                        //page.destroy()
-                    }
-                }
-            }
-            onTriggered: {
-                Qt._pane = paneDebug
-            }
-        }
+//        Tab {
+//            enabled: true
+//            id: tabDebug
+//            title: "Debug"
+//            imageSource: "asset:///images/bb10/ic_diagnostics.png"
+//            NavigationPane {
+//                
+//                id: paneDebug
+//                Debug {
+//                    id: debugTabInstance
+//                }
+//                onPushTransitionEnded: {
+//                    if (page && page.init) {
+//                        page.init()
+//                    }
+//                }
+//                onPopTransitionEnded: {
+//                    if (page) {
+//                        if (page.cleanup) {
+//                            page.cleanup()
+//                        }
+//                        /*
+//                         * DO NOT DESTROY THE PAGE! FIX ME!
+//                         * Actions and triggers and possibly more become the children of the page and get destroyed as well.
+//                         */
+//                        //page.destroy()
+//                    }
+//                }
+//            }
+//            onTriggered: {
+//                Qt._pane = paneDebug
+//            }
+//        }
 
 
     /*// Unimplemented

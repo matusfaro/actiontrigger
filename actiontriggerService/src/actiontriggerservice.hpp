@@ -36,6 +36,8 @@ namespace actiontrigger
         ActionTriggerService();
         virtual ~ActionTriggerService();
 
+        void start();
+
     private:
         static Logger* LOG;
     };

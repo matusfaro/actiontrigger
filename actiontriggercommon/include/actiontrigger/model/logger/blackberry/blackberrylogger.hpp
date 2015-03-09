@@ -29,6 +29,7 @@
 #include <qt4/QtCore/qDebug>
 #include "actiontrigger/model/logger/logger.hpp"
 #include <bb/cascades/ArrayDataModel>
+#include <process.h>
 
 namespace actiontrigger
 {
@@ -58,7 +59,11 @@ namespace actiontrigger
 
         static std::map<std::string, BlackberryLogger*>* instances;
         static std::map<std::string, BlackberryLogger*>* getMap();
+        static void log(std::string);
 
+        static QMutex logFileLock;
+        static QFile* logFile;
+        static QTextStream* logStream;
         static ConnectDataModel* dataModelAll;
         static ConnectDataModel* dataModelLoading;
     };

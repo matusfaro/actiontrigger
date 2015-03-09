@@ -3,22 +3,19 @@ BASEDIR = $$quote($$_PRO_FILE_PWD_)
 
 device {
     CONFIG(debug, debug|release) {
-        profile {
+        !profile {
+            LIBS += -lactiontriggercommon
+
             CONFIG += \
-                config_pri_assets \
-                config_pri_source_group1
-        } else {
-            CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         }
-
     }
 
     CONFIG(release, debug|release) {
         !profile {
+            LIBS += -lactiontriggercommon
+
             CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         }
     }
@@ -27,8 +24,9 @@ device {
 simulator {
     CONFIG(debug, debug|release) {
         !profile {
+            LIBS += -lactiontriggercommon
+
             CONFIG += \
-                config_pri_assets \
                 config_pri_source_group1
         }
     }
@@ -37,17 +35,19 @@ simulator {
 config_pri_source_group1 {
     SOURCES += \
         $$quote($$BASEDIR/src/actiontriggerservice.cpp) \
-        $$quote($$BASEDIR/src/headlesslistener.cpp) \
-        $$quote($$BASEDIR/src/suicidebooth.cpp) \
         $$quote($$BASEDIR/src/headlesscontroller.cpp) \
-        $$quote($$BASEDIR/src/main.cpp)
+        $$quote($$BASEDIR/src/headlesslistener.cpp) \
+        $$quote($$BASEDIR/src/main.cpp) \
+        $$quote($$BASEDIR/src/suicidebooth.cpp)
 
     HEADERS += \
         $$quote($$BASEDIR/src/actiontriggerservice.hpp) \
-        $$quote($$BASEDIR/src/suicidebooth.hpp) \
         $$quote($$BASEDIR/src/headlesscontroller.hpp) \
-        $$quote($$BASEDIR/src/headlesslistener.hpp)
+        $$quote($$BASEDIR/src/headlesslistener.hpp) \
+        $$quote($$BASEDIR/src/suicidebooth.hpp)
 }
+
+INCLUDEPATH += $$quote($$BASEDIR/src)
 
 CONFIG += precompile_header
 
@@ -59,10 +59,7 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/*.c++) \
         $$quote($$BASEDIR/../src/*.cc) \
         $$quote($$BASEDIR/../src/*.cpp) \
-        $$quote($$BASEDIR/../src/*.cxx) \
-        $$quote($$BASEDIR/../assets/*.qml) \
-        $$quote($$BASEDIR/../assets/*.js) \
-        $$quote($$BASEDIR/../assets/*.qs)
+        $$quote($$BASEDIR/../src/*.cxx)
 
     HEADERS += \
         $$quote($$BASEDIR/../src/*.h) \

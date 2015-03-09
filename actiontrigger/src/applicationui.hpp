@@ -82,7 +82,7 @@ namespace bb
  */
 class ApplicationUI: public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 public Q_SLOTS:
     void onExit();
 public:
@@ -101,6 +101,7 @@ private:
     bb::cascades::Application* app;
     actiontrigger::ActionTrigger* actiontrigger;
     bb::platform::Notification notification;
+    void copyCoreDump();
 };
 
 #endif /* ApplicationUI_HPP_ */

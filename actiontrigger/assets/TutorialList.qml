@@ -89,7 +89,7 @@ Page {
                         action: "addActionAtEnd",
                         constraint: "^ACTION_SLEEP$",
                         pretext: "Click on the plus sign to add an action at the end.",
-                        text: "ExecutionFlow->Sleep(Action)"
+                        text: "Clock->Sleep(Action)"
                     },
                     {
                         action: "back",

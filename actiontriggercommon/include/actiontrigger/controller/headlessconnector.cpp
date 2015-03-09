@@ -25,6 +25,8 @@
 namespace actiontrigger
 {
     Logger* HeadlessConnector::LOG = LoggerFactory::getInstance("HeadlessConnector");
+    ////// HEADLESS DISABLED
+    const bool HeadlessConnector::HEADLESS_ENABLED = false;
     HeadlessConnector* HeadlessConnector::instance = NULL;
 
     HeadlessConnector* HeadlessConnector::get()

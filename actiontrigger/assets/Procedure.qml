@@ -253,7 +253,7 @@ Page {
                         inputMode: TextFieldInputMode.Text
                         onTextChanging: {
                             if (root.active) {
-                                
+
                                 // Tutorial next step
                                 if (tutorialSteps[step].action == "name" && text.match(tutorialSteps[step].constraint) == text) {
                                     step ++
@@ -311,7 +311,7 @@ Page {
                         }
                     }
                 }
-                
+
                 // Tutorial hint
                 Label {
                     textStyle.color: Color.Green
@@ -322,6 +322,8 @@ Page {
 
                 // RUN IN BACKGROUND
                 DefaultContainer {
+                    ////// HEADLESS DISABLED //////
+                    visible: false
                     Label {
                         textStyle.base: SystemDefaults.TextStyles.TitleText
                         text: "Run in background"
@@ -335,7 +337,7 @@ Page {
                             if (tutorialSteps[step].action == "background" && checked == tutorialSteps[step].constraint) {
                                 step ++
                             }
-                            
+
                             if (root.active) {
                                 Qt.ProcedurePageProcedureView.backgrounded = checked
                             }
@@ -612,7 +614,7 @@ Page {
                                 if (tutorialSteps[step].action == "logTab") {
                                     step ++
                                 }
-                                
+
                                 runvar.visible = false
                                 runlog.visible = true
                             }

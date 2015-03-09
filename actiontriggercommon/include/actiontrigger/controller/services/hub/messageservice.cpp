@@ -34,7 +34,7 @@ namespace actiontrigger
 
     MessageService::MessageService(bb::pim::account::AccountKey accountKey) :
             accountKey(accountKey), isReceiveConnected(false), messageService(
-                    new bb::pim::message::MessageService(0))
+                    new bb::pim::message::MessageService((QObject*) NULL))
     {
         connectMsgRecv();
     }
@@ -170,8 +170,7 @@ namespace actiontrigger
             recipientQ = recipientQ.replace(QRegExp("\".+\" *<(.+)>"), "\\1");
             LOG->trace(
                     SSTR(
-                            "Recipient replaced '" << recipient << "' with '"
-                                    << recipientQ.toStdString() << "'"));
+                            "Recipient replaced '" << recipient << "' with '" << recipientQ.toStdString() << "'"));
 
             bb::pim::message::MessageContact rto = bb::pim::message::MessageContact(-1,
                     bb::pim::message::MessageContact::To, QString::fromStdString(recipient),
@@ -244,8 +243,7 @@ namespace actiontrigger
         if (!message.isValid()) {
             LOG->trace(
                     SSTR(
-                            "Received invalid message: accountKey=" << accountKey << "  msgKey="
-                                    << messageKey));
+                            "Received invalid message: accountKey=" << accountKey << "  msgKey=" << messageKey));
             return;
         }
 
@@ -253,8 +251,7 @@ namespace actiontrigger
         if (!message.isInbound()) {
             LOG->trace(
                     SSTR(
-                            "Received non-inbound message: accountKey=" << accountKey << " msgKey="
-                                    << messageKey));
+                            "Received non-inbound message: accountKey=" << accountKey << " msgKey=" << messageKey));
             return;
         };
         if (message.mimeType() != bb::pim::message::MimeTypes::Sms
@@ -264,8 +261,7 @@ namespace actiontrigger
             // Download rest of message content
             LOG->trace(
                     SSTR(
-                            "Downloading rest of message: accountKey=" << accountKey << " msgKey="
-                                    << messageKey));
+                            "Downloading rest of message: accountKey=" << accountKey << " msgKey=" << messageKey));
             messageService->downloadMessage(accountKey, messageKey);
         } else {
             // Push onto queue
@@ -292,8 +288,7 @@ namespace actiontrigger
 
         LOG->trace(
                 SSTR(
-                        "Received message body: accountKey=" << accountKey << " msgKey="
-                                << messageKey));
+                        "Received message body: accountKey=" << accountKey << " msgKey=" << messageKey));
 
         // Retrieve message
         bb::pim::message::Message message = messageService->message(accountKey, messageKey);
@@ -302,16 +297,14 @@ namespace actiontrigger
         if (!message.isValid()) {
             LOG->trace(
                     SSTR(
-                            "Received invalid message: accountKey=" << accountKey << "  msgKey="
-                                    << messageKey));
+                            "Received invalid message: accountKey=" << accountKey << "  msgKey=" << messageKey));
             return;
         }
         // Message must be inbound only
         if (!message.isInbound()) {
             LOG->trace(
                     SSTR(
-                            "Received non-inbound message: accountKey=" << accountKey << " msgKey="
-                                    << messageKey));
+                            "Received non-inbound message: accountKey=" << accountKey << " msgKey=" << messageKey));
             return;
         }
 

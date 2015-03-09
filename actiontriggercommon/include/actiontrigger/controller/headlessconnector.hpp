@@ -41,6 +41,8 @@ namespace actiontrigger
 
     Q_PROPERTY (bool isConnected READ getIsConnected NOTIFY notifyChangeIsConnected FINAL)
     public:
+        static const bool HEADLESS_ENABLED;
+
         static HeadlessConnector* get();
 
         bool getIsConnected() const;

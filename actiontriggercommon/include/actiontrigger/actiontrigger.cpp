@@ -68,9 +68,11 @@ namespace actiontrigger
         qsettings.setValue(TRIAL_PERIOD_STAMP, this->trialStart);
 
         // Setup headless
-        HeadlessConnector* headless = HeadlessConnector::get();
-        connect(headless, SIGNAL(procedureRunning(int)), this, SLOT(headlessProcedureRunning(int)));
-        headless->start();
+        if (HeadlessConnector::HEADLESS_ENABLED) {
+            HeadlessConnector* headless = HeadlessConnector::get();
+            connect(headless, SIGNAL(procedureRunning(int)), this, SLOT(headlessProcedureRunning(int)));
+            headless->start();
+        }
 
         // Setup user facing message signal propagation
         connect(GlobalResources::get(), SIGNAL(displayUserMessage(QString)), this,

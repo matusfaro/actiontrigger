@@ -41,7 +41,8 @@ int main(int argc, char **argv)
 
     Application app(argc, argv);
 
-    new actiontrigger::ActionTriggerService();
+    actiontrigger::ActionTriggerService* service = new actiontrigger::ActionTriggerService();
+    service->start();
 
     // Enter the application main event loop.
     return Application::exec();

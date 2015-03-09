@@ -70,6 +70,23 @@ Sheet {
             verticalAlignment: VerticalAlignment.Fill
 
             DefaultPageContainer {
+                
+                // -- Contact info --
+                Label {
+                    text: "App information"
+                }
+                Label {
+                    textStyle.fontSize: FontSize.Small
+                    multiline: true
+                    text: "<html>Website:
+  <a href='http://actiontrigger.net/'>http://actiontrigger.net/</a>
+Source code:
+  <a href='https://github.com/matusfaro/actiontrigger'>https://github.com/matusfaro/actiontrigger</a>
+</html>"
+                }
+                
+                Divider {
+                }
 
                 // -- Contact info --
                 Label {

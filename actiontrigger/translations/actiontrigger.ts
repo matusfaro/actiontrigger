@@ -121,17 +121,17 @@
 <context>
     <name>Procedure</name>
     <message>
-        <location filename="../assets/Procedure.qml" line="543"/>
+        <location filename="../assets/Procedure.qml" line="545"/>
         <source>Select Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Procedure.qml" line="545"/>
+        <location filename="../assets/Procedure.qml" line="547"/>
         <source>Default Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Procedure.qml" line="551"/>
+        <location filename="../assets/Procedure.qml" line="553"/>
         <source>Icon picker</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,35 +165,35 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="110"/>
+        <location filename="../assets/main.qml" line="112"/>
         <source>Support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="377"/>
-        <location filename="../assets/main.qml" line="387"/>
+        <location filename="../assets/main.qml" line="379"/>
+        <location filename="../assets/main.qml" line="389"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="379"/>
-        <location filename="../assets/main.qml" line="399"/>
+        <location filename="../assets/main.qml" line="381"/>
+        <location filename="../assets/main.qml" line="401"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="389"/>
-        <location filename="../assets/main.qml" line="518"/>
+        <location filename="../assets/main.qml" line="391"/>
+        <location filename="../assets/main.qml" line="520"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="397"/>
+        <location filename="../assets/main.qml" line="399"/>
         <source>Prevent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="516"/>
+        <location filename="../assets/main.qml" line="518"/>
         <source>Support page</source>
         <translation type="unfinished"></translation>
     </message>

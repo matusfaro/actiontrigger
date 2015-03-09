@@ -35,7 +35,7 @@ namespace actiontrigger
             "GeoLocationRetrieve");
     const StatementInfo ActionGeoLocationRetrieve::info(false, "GPS Location",
             ActionGeoLocationRetrieve::TYPE,
-            "Retrieve the device's GPS location. Includes latitude, longitude and altitude of current position");
+            "Retrieve the device's GPS location via satellites, cellular towers and WiFi networks. Includes latitude, longitude and altitude of current position");
 
     const StatementInfo ActionGeoLocationRetrieve::getInfo()
     {
@@ -56,6 +56,12 @@ namespace actiontrigger
     {
         if (parameterDefinitions == NULL) {
             parameterDefinitions = new std::vector<ParameterDefinition*>();
+            ParameterDefinition* type = ParameterDefinition::getDropdown("PROVIDER", "Source",
+                    "Location source", "provider");
+            type->dropdownAddOption("Hybrid", "GEOLOCATION_PROVIDER_HYBRID");
+            type->dropdownAddOption("Satellite", "GEOLOCATION_PROVIDER_GNSS");
+            type->dropdownAddOption("Cell-site and Wi-Fi", "GEOLOCATION_PROVIDER_NETWORK");
+            parameterDefinitions->push_back(type);
             parameterDefinitions->push_back(
                     ParameterDefinition::getSlider("TIMEOUT", "Timeout",
                             "Amount of seconds to wait for a GPS signal", "1", "60", "1"));
@@ -67,6 +73,8 @@ namespace actiontrigger
     {
         if (key == "TIMEOUT") {
             return "10";
+        } else if (key == "PROVIDER") {
+            return "GEOLOCATION_PROVIDER_HYBRID";
         } else {
             return Statement::getDefaultParameter(key);
         }
@@ -87,10 +95,18 @@ namespace actiontrigger
         vars->push_back(
                 new statement_output_variable_definition("GPS_LONGITUDE",
                         "Current location's longitude.", "NUMBER"));
-//    vars->push_back(new statement_output_variable_definition("GPS_ALTITUDE", "Current location's altitude", "NUMBER"));
-//    vars->push_back(new statement_output_variable_definition("GPS_SPEED_HORIZONTAL", "Current horizontal speed (meter/second)", "NUMBER"));
-//    vars->push_back(new statement_output_variable_definition("GPS_SPEED_VERTICAL", "Current vertical speed  (meter/second)", "NUMBER"));
-//    vars->push_back(new statement_output_variable_definition("GPS_SPEED_MAGNITUDE", "Combination of horizontal and vertical speed  (meter/second)", "NUMBER"));
+        vars->push_back(
+                new statement_output_variable_definition("GPS_ALTITUDE",
+                        "Current location's altitude", "NUMBER"));
+        vars->push_back(
+                new statement_output_variable_definition("GPS_SPEED_HORIZONTAL",
+                        "Current horizontal speed (meter/second)", "NUMBER"));
+        vars->push_back(
+                new statement_output_variable_definition("GPS_SPEED_VERTICAL",
+                        "Current vertical speed  (meter/second)", "NUMBER"));
+        vars->push_back(
+                new statement_output_variable_definition("GPS_SPEED_MAGNITUDE",
+                        "Combination of horizontal and vertical speed  (meter/second)", "NUMBER"));
         return vars;
     }
 
@@ -99,6 +115,21 @@ namespace actiontrigger
         DataModelLogger* USERLOG = state->getLogger();
 
         state->getRuntimeResources()->bpsInitialize();
+
+        std::string providerString = getParameter("PROVIDER", state);
+        geolocation_provider_t provider;
+        if (providerString == "GEOLOCATION_PROVIDER_GNSS") {
+            provider = GEOLOCATION_PROVIDER_GNSS;
+        } else if (providerString == "GEOLOCATION_PROVIDER_NETWORK") {
+            provider = GEOLOCATION_PROVIDER_NETWORK;
+        } else {
+            provider = GEOLOCATION_PROVIDER_HYBRID;
+        }
+        if (BPS_SUCCESS != geolocation_set_provider(provider)) {
+            USERLOG->error(SSTR("Unable to set provider: " << strerror(errno)));
+            StatementLOG->warning(SSTR("Unable to set provider: " << strerror(errno)));
+            return;
+        }
 
         errno = EOK;
         if (BPS_SUCCESS != geolocation_request_events(0)) {
@@ -127,17 +158,26 @@ namespace actiontrigger
             StatementLOG->debug(SSTR("GPS_LONGITUDE: " << geolocation_event_get_longitude(event)));
             state->setUserProperty("GPS_LONGITUDE", SSTR(geolocation_event_get_longitude(event)));
 
-//        StatementLOG->debug(SSTR("GPS_ALTITUDE: " << geolocation_event_get_altitude(event)));
-//        state->setUserProperty("GPS_ALTITUDE", SSTR(geolocation_event_get_altitude(event)));
-//
-//        StatementLOG->debug(SSTR("GPS_SPEED_HORIZONTAL: " << geolocation_event_get_speed(event)));
-//        state->setUserProperty("GPS_SPEED_HORIZONTAL", SSTR(geolocation_event_get_speed(event)));
-//
-//        StatementLOG->debug(SSTR("GPS_SPEED_VERTICAL: " << geolocation_event_get_vertical_speed(event)));
-//        state->setUserProperty("GPS_SPEED_VERTICAL", SSTR(geolocation_event_get_vertical_speed(event)));
-//
-//        StatementLOG->debug(SSTR("GPS_SPEED_MAGNITUDE: " << std::hypot(geolocation_event_get_speed(event), geolocation_event_get_vertical_speed(event))));
-//        state->setUserProperty("GPS_SPEED_MAGNITUDE", SSTR(std::hypot(geolocation_event_get_speed(event), geolocation_event_get_vertical_speed(event))));
+            StatementLOG->debug(SSTR("GPS_ALTITUDE: " << geolocation_event_get_altitude(event)));
+            state->setUserProperty("GPS_ALTITUDE", SSTR(geolocation_event_get_altitude(event)));
+
+            StatementLOG->debug(
+                    SSTR("GPS_SPEED_HORIZONTAL: " << geolocation_event_get_speed(event)));
+            state->setUserProperty("GPS_SPEED_HORIZONTAL",
+                    SSTR(geolocation_event_get_speed(event)));
+
+            StatementLOG->debug(
+                    SSTR("GPS_SPEED_VERTICAL: " << geolocation_event_get_vertical_speed(event)));
+            state->setUserProperty("GPS_SPEED_VERTICAL",
+                    SSTR(geolocation_event_get_vertical_speed(event)));
+
+            StatementLOG->debug(
+                    SSTR(
+                            "GPS_SPEED_MAGNITUDE: " << std::hypot(geolocation_event_get_speed(event), geolocation_event_get_vertical_speed(event))));
+            state->setUserProperty("GPS_SPEED_MAGNITUDE",
+                    SSTR(
+                            std::hypot(geolocation_event_get_speed(event),
+                                    geolocation_event_get_vertical_speed(event))));
         } else {
             USERLOG->error("Did not receive GPS information");
         }

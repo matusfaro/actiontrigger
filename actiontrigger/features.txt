@@ -1,0 +1,350 @@
+
+
+ --- Before deployment ---
+- Set log level to warn
+- Disable web inspector for webviews
+- Point to actiontrigger.net
+- Disable error printing and point to prod in api.php
+- Point to prod in cconfig.php
+   
+ --- TUTORIALS ---
+
+Basics
+- Branches
+
+Examples
+- Detect phone unplugged
+- Silent notification profile
+- Step counter
+
+ --- REQUESTS ---
+
+- sensor background option for sensors or warning.
+- Move green tutorial text to scrollable part for smaller device screens
+- Record audio with auto append timestamp
+- NFC Trigger
+- Read texts and emails out loud.
+- Catalog
+
+
+ --- CHANGELOGS ---
+
+= Changelog (1.5)
+- Ability to retrieve GPS Location using Wifi and Cellular only (No Satellite)
+- Retrieve Cellular Network Information including cell tower
+- Removed Headless due to stability problems
+- Other stability improvements and bug fixes
+
+= Changelog (1.4)
+- Introducing *** Headless *** allowing you to run procedures in the background . (Note: headless is not fully tested and may crash in certain situations)
+- ActionTrigger has gone open-source. Source code is located on github:
+github.com/matusfaro/actiontrigger
+
+= Changelog (1.3)
+- Introducing *** Online Portal *** allowing you to upload, discuss, rate and download procedures. (Blackberry ID authentication is required)
+- New External Dialog Notification action displays a dialog outside of the application.
+- Get, set or clear the clipboard.
+- Adjust and retrieve volume level for input and output devices
+- Place a phone call; trigger on a phone call (Requires Phone Access and Control permissions)
+- Option to append date and time to filename when recording video, photo, or audio
+- Retrieve or trigger on current Notification Profile.
+- GPS action run when app is backgrounded
+- Fixed crash when turning on flash and taking a picture
+
+= Changelog (1.2)
+
+Improvements:
+- Action to send a message from PIM accounts (Email, SMS, MMS)
+- New set of tutorials to help learn how to use the application
+- Search when selecting new Action or Trigger
+
+Bug Fixes:
+- Fixed Time Range action triggering at incorrect time
+- Improved reliability of GPS action
+- Removed time zone from time based actions and triggers
+- UI space optimization for small screen devices
+- Fixed missing actions/triggers when selecting
+- Fixed missing variable names
+- Other fixes and improvements
+
+
+= Changelog (1.1)
+
+- Added Action to change global notification profiles
+- Added simple tutorial for creating a procedure
+- Fixed application crash detection logic
+- Various fixes and adjustments
+
+
+
+ --- NOTES ---
+
+
+Procedure actions (autostart, shortcut, etc..) Hide description unless clicked
+procedure page, add all settings to a tabbed pane: Settings, edit, Run it
+overview page add all side menu functionality as libraray including edit
+overview page, put favourite/all button in right side menu with a help button as well
+Capitalize all headings
+description of other items sometimes open by itself when opening another descriptions..
+BUG: Orientation statement has illuminance as property
+Label or group triggers and separate from actions during statement selection
+change run forever to either run once or loop forever
+
+--- Keywords (10 total allowed)
+
+automation,profiles,action,trigger,programmable,multitool,tasker,events,control,flashlight
+
+ --- app desc ---
+ 
+ -- SHORT DESC:
+
+Take control of your mobile device
+ 
+ -- LONG DESC:
+
+NOTE:
+= This application is currently a free public BETA. For bugs and suggestions, please email the developer.
+= Application permissions are not required, but certain features may be limited if disallowed.
+= Improper usage may cause faster battery drain. Be aware of the consequences.
+
+ActionTrigger lets you take control of your mobile device by executing a set of user-programmable actions, triggers and branches.
+
+TRIGGERS allow you to wait until a specific resource changes to the desired state
+ - Receive a message
+ - Move to a location
+ - Time of day
+
+ACTIONS will perform the task you want
+ - Turn on Bluetooth
+ - Change your background
+ - Snap a photo
+
+BRANCHES allow you to control execution flow
+ - Conditional branching
+ - Loop actions
+ - Wait until a set of triggers are active at the same time
+
+Features:
+* Bluetooth
+* Wifi
+* Battery statistics
+* Alarm clock and timer
+* Network usage counter
+* LED light
+* Phone vibrate
+* Customize Active Frame
+* Media
+  - Take a photo or video
+  - Control camera flash
+  - Record and play audio
+* Customize wallpaper
+* Hub Notifications
+* Read incoming messages
+* Sensors
+  - Accelerometer
+  - Altimeter
+  - Compass
+  - GPS location
+  - Light illuminance
+  - Magnetometer
+  - Proximity
+* Math functions and random number generator
+* Temporary and persistent variables
+* Regular Expressions
+* Custom scripting:
+  - JavaScript
+  - Korn shell
+  - Python
+
+
+
+ --- DEPRACATED BELOW ---
+Use the excel spreadsheet project_tracker.xlsx
+
+--- Release schedule
+
+-- Release 2.0 (PLANNED)
+
+ - Go headless
+ - Actions and Triggers for this release
+ - Bug fixes for this release
+
+-- Release 1.1 (PLANNED)
+
+ - Add about screen with a link to upcoming features.
+ - On action or trigger selection, ability to collapse a service. Collapsed by default
+ - Export logs to file or email
+ - Ability to never stop procedure in the middle of performing a set of actions. Or ability to have a set of cleanup actions
+ - New requirement for TriggerValues: trigger on difference between two values.
+ - Actions and Triggers for this release
+ - Bug fixes for this release
+  
+-- Release 1.0 (IN DEVELOPMENT)
+
+ - Search bar on library page, new actions, new triggers, variables, etc...
+ - Review all help text for actions triggers and menus.
+ - Review all action and trigger parameter types to match the suitable type
+ - Get rid of Always true and Action nop
+ - Rename active frame to minimized overlay or something...
+ - Active frame should reset to default if procedure ends
+ - Default Flashlight procedure - Shake to toggle should capture all directions instead of X axis only
+ - Variable page (services) - group by actions and triggers
+ - In overview tab and library tab, favourites hsould have a star and always at the top
+ - In overview tab and library tab, hold menu should have start, stop, favourite, delete
+ - Figure out payment model. Donation only model or freemium model with new features locked to premium users.
+ - Ability for various types of parameters. Dropdown selection, boolean, numbers, passwords, etc..
+ - Add help text
+ - Fix user log output, add timestamps,
+ - Add activity indicator on import and export
+ - Actions and Triggers for this release
+ - Bug fixes for this release
+ 
+--- Actions/Triggers
+
+Pending Release 1.0:
+
+- memory stats
+- cpu stats
+- Play sounds
+- math operation on two variables
+- Trigger on hardware media keys
+- Set variable
+- Get set global variable
+- Trigger on variable
+- If then skip
+- Signal other procedure to continue from a halt
+
+Other:
+
+- filesystem capacity and usage for onboard and sd card (see FileSystemInfo)
+- os version (PlatformInfo)
+- Hub - BBM, facebook, ...
+- Modify system profiles
+- Trigger on bedside mode
+- GPS - Geofencing
+- Music - Access now playing, play stop pause next, detect headphones in or out
+- Audio
+- Send notification to universal inbox
+- Add shortcuts instead of triggers
+- Text to voice (Port Festival Lite to BB10)
+- Detect wrong credentials (Probably not possible)
+- Microphone
+- Camera
+- Phone control
+- Capture screen
+- Screen
+- Network?
+- Calendar?
+- Contacts?
+- Timer - do something on the hour or every X minutes
+- Stats about num running procedures
+- Block emails sms etc ...
+- Global variables (across procedures)
+- invocation, wait until app is maximized
+- Forms - input boxes,  to vars
+- Wait
+- Speakers plugged in?
+- Change sounds profile
+- Change volume
+- Brightness
+- File ops, read in, write, move, copy
+- vars - set, add, multiply, random
+- regex split - take in var ABC and output ABC0, ABC1, etc...
+- Loops??
+- Random number
+- Random file select (for random wallpaper)
+- Wait forever or user command
+ 
+--- Bugs
+
+- Memory leaks everywhere
+- filter has weird behavior with unseen items.
+- Multiple variables show up in selectVariable page when duplicate actions/triggers are added
+- Multi delete only deletes some items.
+- Crash app, click reset, click continue. DB shouldn't be reset.
+- At unknown times, some random parameters are overwritten with the timestamp: "00:00:00 GMT-0500 (EST)" ??!?!?
+
+--- Use Cases (Merge this section with another)
+
+- Profiles
+ On either of the following: 
+ 2. bluetooth detect
+ 3. geofence
+ 4.  time of day
+ Set the appropriate profile consisting of:
+ 1. Wallpaper
+ 2. Wifi, bluetooth, radio on/off
+ 3. sound profile, vibrate
+
+- Auto message contacts based on criteria with information:
+ 1. location
+
+--- Pre-installed procedures
+
+- flashlight
+- Show something on splash screen (Battery info? Time? Speedometer?)
+- Daily random wallpaper
+- Share location (get GPS location and send over SMS )
+- Flash different LEDs for sms email, ...
+- Alarm clock
+- Detect power outage. If on battery, vibrate blink and make sounds
+- Tell the time by vibrating phone. Vibrate H times, wait, vibrate M times
+- Magnetic field detector. Vibrate if magnetic field detected.
+- Camera timer
+
+--- Permissions
+
+Camera
+- Flashlight
+
+Location
+- location
+
+Shared Files
+- Export/Import
+
+Email and PIM messages
+- Receive messages
+
+
+--- App store description
+
+Only allow the permissions you wish to use. It is strongly recommended to enable all.
+
+
+
+
+
+
+
+
+
+bbm share doewsnt work
+bluetooth on off at improve
+in procedure page, make "triggers" and "actions" clickable or only visible when present
+in flash trigger, mention you need a sleep to keep the light on or add a sleep with parameter
+on try it, have a restart button
+
+on bedside mode on, turn on flash
+on try it, add parameters in a list
+give approximate values as suggestions for sensors
+in flash, if already on, don't turn on again
+In light, /mesaures/measures/
+it is not intuitive that procedure ends at the end
+overview tab, at the top show dropdown or checkbox betweem fav and all
+search sucks
+statements with failed parametr checks should become red
+led blink up to 3 times max
+when trying out procedure, keep statements shown, higfhlight the currently running stateemnt
+rearrange procedures
+restore to defaults
+run with priority should be on procedure level
+take out loglevel from settings.
+in support page capitalize all words in buttons
+add select more in right hand menu (currently only visible when click on hold), also do the same in overview tab
+in overview tab, when clicked, text gets smushed
+rename library to edit?
+overview tab, right click edit, open library tab, open procedure
+tagging or categories of procedures. dropdown of categories to filter in overview tab.
+
+

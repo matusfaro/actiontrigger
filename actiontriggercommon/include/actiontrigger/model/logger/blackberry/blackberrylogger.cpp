@@ -23,8 +23,11 @@
 namespace actiontrigger
 {
 
-    LogLevel BlackberryLogger::loglevel = DEBUG;
+    LogLevel BlackberryLogger::loglevel = NONE;
     std::map<std::string, BlackberryLogger*>* BlackberryLogger::instances = NULL;
+    QMutex BlackberryLogger::logFileLock;
+    QFile* BlackberryLogger::logFile = NULL;
+    QTextStream* BlackberryLogger::logStream = NULL;
     ConnectDataModel* BlackberryLogger::dataModelAll = NULL;
     ConnectDataModel* BlackberryLogger::dataModelLoading = NULL;
 
@@ -32,11 +35,7 @@ namespace actiontrigger
     {
         if (loglevel >= TRACE) {
             lastMessage = getTimestamp() + " " + getTag("TRACE") + msg;
-            std::cerr << lastMessage << std::endl;
-            qDebug(lastMessage.c_str());
-            if (NULL != this->dataModelAll) {
-                BlackberryLogger::dataModelAll->send(lastMessage);
-            }
+            log(lastMessage);
         }
     }
 
@@ -44,23 +43,15 @@ namespace actiontrigger
     {
         if (loglevel >= DEBUG) {
             lastMessage = getTimestamp() + " " + getTag("DEBUG") + msg;
-            std::cerr << lastMessage << std::endl;
-            qDebug(lastMessage.c_str());
-            if (NULL != this->dataModelAll) {
-                BlackberryLogger::dataModelAll->send(lastMessage);
-            }
+            log(lastMessage);
         }
     }
 
     void BlackberryLogger::info(std::string msg)
     {
         if (loglevel >= INFO) {
-            lastMessage = getTimestamp() + " " + getTag("DEBUG") + msg;
-            std::cerr << lastMessage << std::endl;
-            qDebug(lastMessage.c_str());
-            if (NULL != this->dataModelAll) {
-                BlackberryLogger::dataModelAll->send(lastMessage);
-            }
+            lastMessage = getTimestamp() + " " + getTag("INFO") + msg;
+            log(lastMessage);
         }
     }
 
@@ -68,11 +59,7 @@ namespace actiontrigger
     {
         if (loglevel >= WARNING) {
             lastMessage = getTimestamp() + " " + getTag("WARNING") + msg;
-            std::cerr << lastMessage << std::endl;
-            qWarning(lastMessage.c_str());
-            if (NULL != this->dataModelAll) {
-                BlackberryLogger::dataModelAll->send(lastMessage);
-            }
+            log(lastMessage);
         }
     }
 
@@ -80,12 +67,7 @@ namespace actiontrigger
     {
         if (loglevel >= ERROR) {
             lastMessage = getTimestamp() + " " + getTag("ERROR") + msg;
-            std::cerr << lastMessage << std::endl;
-            // Don't die on me... report it as warning instead
-            qWarning(lastMessage.c_str());
-            if (NULL != this->dataModelAll) {
-                BlackberryLogger::dataModelAll->send(lastMessage);
-            }
+            log(lastMessage);
         }
     }
 
@@ -93,12 +75,7 @@ namespace actiontrigger
     {
         if (loglevel >= CRITICAL) {
             lastMessage = getTimestamp() + " " + getTag("CRITICAL") + msg;
-            std::cerr << lastMessage << std::endl;
-            // Don't die on me... report it as warning instead
-            qWarning(lastMessage.c_str());
-            if (NULL != this->dataModelAll) {
-                BlackberryLogger::dataModelAll->send(lastMessage);
-            }
+            log(lastMessage);
         }
     }
 
@@ -106,11 +83,11 @@ namespace actiontrigger
     {
         if (NULL != this->dataModelLoading) {
             lastMessage = msg;
-            std::cerr << lastMessage << std::endl;
+            log(lastMessage);
             BlackberryLogger::dataModelLoading->send(lastMessage);
         } else {
             lastMessage = "dataModelLoading is not set, omitting: " + msg;
-            std::cerr << lastMessage << std::endl;
+            log(lastMessage);
         }
     }
 
@@ -145,6 +122,48 @@ namespace actiontrigger
         if (!instances)
             instances = new std::map<std::string, BlackberryLogger*>();
         return instances;
+    }
+
+    void BlackberryLogger::log(std::string msg)
+    {
+//        {
+//            QMutexLocker lock(&logFileLock);
+//            // Open log file
+//            if (NULL == logFile) {
+//                logFile = new QFile(
+//                        QDir::currentPath() + QString("/shared/misc/actiontrigger.log.")
+//                                + QString::number(QCoreApplication::applicationPid()));
+//                if (logFile->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+//                    logFile->setPermissions(QFile::ReadOther | QFile::ReadUser | QFile::ReadGroup);
+//                } else {
+//                    std::cerr << "Cannot open log file" << std::endl;
+//                    delete logFile;
+//                    logFile = NULL;
+//                }
+//            }
+//            // Open stream
+//            if (NULL != logFile && NULL == logStream) {
+//                logStream = new QTextStream(logFile);
+//            }
+//            // Append log line to file
+//            if (NULL != logStream) {
+//                if (logStream->status() == QTextStream::Ok) {
+//                    logStream->operator <<(QString::fromStdString(msg));
+//                    logStream->operator <<("\n");
+//                    logStream->flush();
+//                } else {
+//                    std::cerr << "log file stream is closed " << logStream->status() << std::endl;
+//                    delete logStream;
+//                    logStream = NULL;
+//                }
+//            }
+//        }
+
+        std::cerr << msg << std::endl;
+        qWarning(msg.c_str());
+        if (NULL != dataModelAll) {
+            BlackberryLogger::dataModelAll->send(msg);
+        }
     }
 
     BlackberryLogger::BlackberryLogger(const std::string& classname) :

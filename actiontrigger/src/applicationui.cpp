@@ -25,6 +25,9 @@ using namespace bb::cascades;
 ApplicationUI::ApplicationUI(bb::cascades::Application* app) :
         QObject(app), app(app)
 {
+    // Copy core dump files
+    // Only used for debugging of release mode issues
+    //    copyCoreDump();
 
     // Create the invocation manager and intentionally leak it.... (We don't want to destroy it)
     bb::system::InvokeManager* invokeManager = new bb::system::InvokeManager(0);
@@ -62,8 +65,8 @@ ApplicationUI::ApplicationUI(bb::cascades::Application* app) :
     this->actiontrigger = new actiontrigger::ActionTrigger();
 
     // Register listener for invocations
-    this->connect(invokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)), this->actiontrigger,
-            SLOT(onInvoke(const bb::system::InvokeRequest&)));
+    this->connect(invokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)),
+            this->actiontrigger, SLOT(onInvoke(const bb::system::InvokeRequest&)));
 
     // Register fullscreen event to clear all notifications
     connect(app, SIGNAL(fullscreen()), &notification, SLOT(clearEffectsForAll()));
@@ -124,3 +127,28 @@ void ApplicationUI::resendNotification()
 {
     // TODO
 }
+
+// http://supportforums.blackberry.com/t5/Native-Development/Is-there-a-way-to-get-a-core-dump-from-an-App-that-crashed-in/td-p/2562353
+void ApplicationUI::copyCoreDump()
+{
+    QDir currentDir = QDir(QDir::currentPath() + QString("/logs"));
+
+    QStringList files;
+    QString fileName = QString("*.core");
+    files = currentDir.entryList(QStringList(fileName), QDir::Files);
+
+    for (int i = 0; i < files.size(); ++i) {
+        QFile file(currentDir.absoluteFilePath(files[i]));
+        QFileInfo info(file.fileName());
+
+        QString finalName = QDir::currentPath() + QString("/shared/misc/") + info.fileName();
+        fprintf(stdout, "Files in log are: %s \n", file.fileName().toStdString().c_str());
+        fprintf(stdout, "Copying to : %s \n", finalName.toStdString().c_str());
+        if (file.copy(finalName)) {
+            fprintf(stdout, "Copy success:\n");
+            QFile filecopied(finalName);
+            filecopied.setPermissions(QFile::ReadOther | QFile::ReadUser | QFile::ReadGroup);
+        }
+    }
+}
+

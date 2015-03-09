@@ -140,6 +140,8 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/include/actiontrigger/controller/services/phone/actionplacecall.cpp) \
         $$quote($$BASEDIR/include/actiontrigger/controller/services/phone/phoneservice.cpp) \
         $$quote($$BASEDIR/include/actiontrigger/controller/services/phone/triggercallupdated.cpp) \
+        $$quote($$BASEDIR/include/actiontrigger/controller/services/phone/actioncellularinfo.cpp) \
+        $$quote($$BASEDIR/include/actiontrigger/controller/services/phone/triggercellularinfo.cpp) \
         $$quote($$BASEDIR/include/actiontrigger/controller/services/sample/actionsample.cpp) \
         $$quote($$BASEDIR/include/actiontrigger/controller/services/sample/branchsample.cpp) \
         $$quote($$BASEDIR/include/actiontrigger/controller/services/sample/triggersample.cpp) \

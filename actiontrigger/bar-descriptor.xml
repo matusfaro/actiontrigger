@@ -30,20 +30,18 @@
     <!-- The name that is displayed in the BlackBerry 10 application installer.
         May have multiple values for each language. See samples or xsd schema file.
         Optional. -->
-    <name>Actiontrigger</name>
+    <name>Action Trigger</name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents
         application version which can be used to check for application upgrade. Values
         can also be 1-part or 2-part. It is not necessary to have a 3-part value.
         An updated version of application must have a versionNumber value higher
         than the previous version. Required. -->
-    <versionNumber>1.4.0</versionNumber>
-    <category>core.games</category>
-    <platformVersion>10.2.0</platformVersion>
+    <versionNumber>1.5.0</versionNumber>
 
     <!-- Fourth digit segment of the package version. First three segments are
         taken from the <versionNumber> element. Must be an integer from 0 to 2^16-1 -->
-    <buildId>252</buildId>
+    <buildId>755</buildId>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents
         the version of the application, as it should be shown to users. Optional. -->
@@ -63,35 +61,25 @@
     
     <configuration name="Device-Debug">
         <platformArchitecture>armle-v7</platformArchitecture>
-        <entryPointType>Qnx/Elf</entryPointType>
-
         <asset entryPointId="actiontrigger" path="arm/o.le-v7-g/actiontrigger"
             entry="true" type="Qnx/Elf">actiontrigger</asset>
+        <!-- HEADLESS DISABLED
         <asset entryPointId="actiontriggerService"
-            path="${workspace_loc:/actiontriggerService/arm/o.le-v7-g/actiontriggerService}"
+            path="../actiontriggerService/arm/o.le-v7-g/actiontriggerService"
             type="Qnx/Elf">actiontriggerService</asset>
+            -->
     </configuration>
 
     <configuration name="Device-Release">
+    	<entryPointType>Qnx/Cascades</entryPointType>
         <platformArchitecture>armle-v7</platformArchitecture>
-        <entryPointType>Qnx/Cascades</entryPointType>
-
         <asset entryPointId="actiontrigger" path="arm/o.le-v7/actiontrigger.so"
-            entry="true" type="Qnx/Cascades">actiontrigger</asset>
+            entry="true" type="Qnx/Elf">actiontrigger.so</asset>
+        <!-- HEADLESS DISABLED
         <asset entryPointId="actiontriggerService"
-            path="${workspace_loc:/actiontriggerService/arm/o.le-v7/actiontriggerService.so}"
+            path="../actiontriggerService/arm/o.le-v7/actiontriggerService.so"
             type="Qnx/Elf">actiontriggerService</asset>
-    </configuration>
-
-    <configuration name="Device-Profile">
-        <platformArchitecture>armle-v7</platformArchitecture>
-        <entryPointType>Qnx/Elf</entryPointType>
-
-        <asset entryPointId="actiontrigger" path="arm-p/o.le-v7-g/actiontrigger"
-            entry="true" type="Qnx/Elf">actiontrigger</asset>
-        <asset entryPointId="actiontriggerService"
-            path="${workspace_loc:/actiontriggerService/arm/o.le-v7-g/actiontriggerService}"
-            type="Qnx/Elf">actiontriggerService</asset>
+            -->
     </configuration>
 
     <configuration name="Simulator-Debug">
@@ -137,22 +125,29 @@
     </configuration>
 
     <entryPoint id="actiontrigger">
-        <name>Actiontrigger</name>
+        <name>Action Trigger</name>
     </entryPoint>
-
-    <!--
-    -->
+    <!-- HEADLESS DISABLED
     <entryPoint id="actiontriggerService">
         <name>actiontriggerService</name>
         <entryPointType>Qnx/Elf</entryPointType>
         <permission system="true">_sys_run_headless</permission>
         <permission system="true">_sys_headless_nostop</permission>
     </entryPoint>
+        -->
 
+    <!-- HEADLESS DISABLED
     <invoke-target id="com.actiontriggerService">
         <invoke-target-type>application.headless</invoke-target-type>
         <invoke-target-name>actiontriggerService</invoke-target-name>
         <entry-point-id>actiontriggerService</entry-point-id>
+        <!- - On app install and device boot
+       <filter>
+	      <action>bb.action.system.STARTED</action>
+	      <mime-type>application/vnd.blackberry.system.event.STARTED</mime-type>
+	      <property var="uris" value="data://local"/>
+	   </filter>
+	   - ->
         <filter>
             <action>bb.action.START</action>
             <mime-type>actiontrigger/START</mime-type>
@@ -161,6 +156,7 @@
         <permission system="true">_sys_run_headless</permission>
         <permission system="true">_sys_headless_nostop</permission>
     </invoke-target>
+        -->
 
     <!-- Invocation receive -->
     <invoke-target id="com.actiontrigger">
@@ -209,8 +205,11 @@
 
     <!-- Permissions -->
     <permission system="true">run_native</permission>
+    <!-- HEADLESS DISABLED
     <permission system="true">_sys_run_headless</permission>
     <permission system="true">_sys_headless_nostop</permission>
+        -->
+    <!-- http://developer.blackberry.com/native/reference/core/com.qnx.doc.bps.lib_ref/topic/about_led_8h.html -->
     <permission>access_led_control</permission>
     <permission>access_pimdomain_messages</permission>
     <permission>access_wifi_public</permission>

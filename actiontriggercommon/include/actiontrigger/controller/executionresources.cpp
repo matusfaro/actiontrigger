@@ -28,8 +28,7 @@ namespace actiontrigger
     ExecutionResources::ExecutionResources(DataModelLogger* USERLOG) :
             USERLOG(USERLOG), channelCreated(false), chid(-1), channelConnectionCreated(false), coid(
                     -1), bpsCreated(false), cameraCreated(false), phoneServiceCreated(false), phoneService(
-                    NULL), recorderCreated(false), playerCreated(false), player(NULL), callbackCalled(
-                    false)
+            NULL), recorderCreated(false), playerCreated(false), player(NULL), callbackCalled(false)
     {
         messageServiceMap = new std::map<bb::pim::account::AccountKey, MessageService*>();
     }
@@ -112,14 +111,12 @@ namespace actiontrigger
                     } else {
                         LOG->warning(
                                 SSTR(
-                                        "Received event with unknown code: "
-                                                << bps_event_get_code(event)));
+                                        "Received event with unknown code: " << bps_event_get_code(event)));
                     }
                 } else {
                     LOG->warning(
                             SSTR(
-                                    "Received event with unknown domain id: "
-                                            << bps_event_get_domain(event)));
+                                    "Received event with unknown domain id: " << bps_event_get_domain(event)));
                 }
             } else {
                 LOG->warning(SSTR("Event is NULL, timeout has been reached"));
@@ -265,6 +262,9 @@ namespace actiontrigger
             case CAMERA_3ALOCKED:
                 USERLOG->error(
                         "Error Opening camera: The function call failed because the 3A have been locked");
+                break;
+            default:
+                USERLOG->error("Error Opening camera");
                 break;
         }
         return false;

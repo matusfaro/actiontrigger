@@ -85,6 +85,8 @@
 #include "actiontrigger/controller/services/device/triggerprofile.hpp"
 #include "actiontrigger/controller/services/phone/actionplacecall.hpp"
 #include "actiontrigger/controller/services/phone/triggercallupdated.hpp"
+#include "actiontrigger/controller/services/phone/actioncellularinfo.hpp"
+#include "actiontrigger/controller/services/phone/triggercellularinfo.hpp"
 #include "actiontrigger/controller/services/camera/actionflash.hpp"
 #include "actiontrigger/controller/services/cover/actioncovercontent.hpp"
 #include "actiontrigger/controller/services/cover/actioncovertitle.hpp"
@@ -235,6 +237,8 @@ namespace actiontrigger
             StatementGroup* group = newGroup("Phone", "Control and monitor phone");
             addActionToGroup<ActionPlaceCall>(group);
             addTriggerToGroup<TriggerCallUpdated>(group);
+            addActionToGroup<ActionCellularInfo>(group);
+            addTriggerToGroup<TriggerCellularInfo>(group);
         }
 
         {

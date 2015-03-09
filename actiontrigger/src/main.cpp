@@ -35,7 +35,7 @@
 Q_DECLARE_METATYPE(QAbstractSocket::SocketState)
 Q_DECLARE_METATYPE(QAbstractSocket::SocketError)
 #include <string>
-Q_DECLARE_METATYPE (std::string)
+Q_DECLARE_METATYPE(std::string)
 
 using namespace bb::cascades;
 
@@ -78,4 +78,3 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     return Application::exec();
     // when loop is exited the Application deletes the scene which deletes all its children (per qt rules for children)
 }
-

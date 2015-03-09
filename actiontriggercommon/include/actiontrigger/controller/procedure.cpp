@@ -144,8 +144,8 @@ namespace actiontrigger
 
             // Prepare execution
             bool runInBackground =
-                    !forceRunLocal && getSetting("BACKGROUNDED").compare("TRUE") == 0 ?
-                            true : false;
+                    HeadlessConnector::HEADLESS_ENABLED && !forceRunLocal
+                            && getSetting("BACKGROUNDED").compare("TRUE") == 0 ? true : false;
             ExecutionState* newExecutionState = new ExecutionState(myExecutionNumber, logger,
                     getUuid(), runInBackground, getId());
             newExecutionState->setExecutionProperty("RUN_ONCE", this->getSetting("RUN_ONCE"));
@@ -192,7 +192,7 @@ namespace actiontrigger
         DataModelLogger* RUNLOG = myState->getLogger();
 
         if (myState->getIsRemote()) {
-            RUNLOG->debug("Execution queued to start in background, supressing all logging...");
+            RUNLOG->debug("Execution queued to start in background, suppressing all logging...");
             HeadlessConnector::get()->procedureStart(getId());
         } else {
             RUNLOG->info("Execution started");

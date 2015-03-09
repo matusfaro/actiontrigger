@@ -18,7 +18,7 @@ device {
 
             CONFIG += \
                 config_pri_assets \
-                config_pri_source_group2
+                config_pri_source_group1
         }
     }
 }
